@@ -2,7 +2,7 @@ package com.calculator.prueba4.Model;
 
 public class OperationModel<T> {
 	
-	private T operation;
+	private String operation;
     private T a;
     private T b;
     
@@ -10,7 +10,7 @@ public class OperationModel<T> {
     	
     }
     
-    public OperationModel(T operation) {
+    public OperationModel(String operation) {
         this.operation = operation;
     }
     
@@ -19,11 +19,11 @@ public class OperationModel<T> {
         this.b = b;
     }
 
-	public T getOperation() {
+	public String getOperation() {
 		return operation;
 	}
 
-	public void setOperation(T operation) {
+	public void setOperation(String operation) {
 		this.operation = operation;
 	}
 
