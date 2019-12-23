@@ -18,101 +18,95 @@ import com.calculator.prueba4.Model.OperationModel;
 import io.corp.calculator.TracerImpl;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ServicesResponseTests extends TracerImpl{
-	
-	@LocalServerPort
-    private int port;
+class ServicesResponseTests extends TracerImpl {
 
-    @Test
-	void ResponseTestsOk() throws URISyntaxException  {
-		
+	@LocalServerPort
+	private int port;
+
+	@Test
+	void ResponseTestsOk() throws URISyntaxException {
+
 		RestTemplate restTemplate = new RestTemplate();
-		//construyo la url
-        final String baseUrl = "http://localhost:"+port+"/calculator";
-        
+		// construyo la url
+		final String baseUrl = "http://localhost:" + port + "/calculator";
+
 		URI uri = new URI(baseUrl);
-		
-		//set de las variables que quiero probar
-        OperationModel<Object> model = new OperationModel<>();
-        model.setA("9.00");
-        model.setB("67.98");
-        
-        //set de los eders de la llamada
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("X-COM-PERSIST", "true");   
-        
-        HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
-        
-        ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
-        
-        //assert para response positiva
-        Assertions.assertEquals(200, result.getStatusCodeValue());
-        
+
+		// set de las variables que quiero probar
+		OperationModel<Object> model = new OperationModel<>();
+		model.setA("9.00");
+		model.setB("67.98");
+
+		// set de los eders de la llamada
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("X-COM-PERSIST", "true");
+
+		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
+
+		ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
+
+		// assert para response positiva
+		Assertions.assertEquals(200, result.getStatusCodeValue());
+
 	}
-    
-    @Test
-	void ResponseTestsMissHeaders() throws URISyntaxException  {
-		
+
+	@Test
+	void ResponseTestsMissHeaders() throws URISyntaxException {
+
 		RestTemplate restTemplate = new RestTemplate();
-		//construyo la url
-        final String baseUrl = "http://localhost:"+port+"/calculator";
-        
+		// construyo la url
+		final String baseUrl = "http://localhost:" + port + "/calculator";
+
 		URI uri = new URI(baseUrl);
-		
-		//set de las variables que quiero probar
-        OperationModel<Object> model = new OperationModel<>();
-        model.setA("9.00");
-        model.setB("67.98");
-        
-        //set de los eders de la llamada
-        HttpHeaders headers = new HttpHeaders(); 
-        
-        HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
-        
-        try
-        {
-            restTemplate.postForEntity(uri, request, String.class);
-            Assertions.fail();
-        }
-        catch(HttpClientErrorException ex) 
-        {
-            //faltan los headers y nos tiene que devolver un 400
-            Assertions.assertEquals(400, ex.getRawStatusCode());
-            Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
-        }
-        
+
+		// set de las variables que quiero probar
+		OperationModel<Object> model = new OperationModel<>();
+		model.setA("9.00");
+		model.setB("67.98");
+
+		// set de los eders de la llamada
+		HttpHeaders headers = new HttpHeaders();
+
+		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
+
+		try {
+			restTemplate.postForEntity(uri, request, String.class);
+			Assertions.fail();
+		} catch (HttpClientErrorException ex) {
+			// faltan los headers y nos tiene que devolver un 400
+			Assertions.assertEquals(400, ex.getRawStatusCode());
+			Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
+		}
+
 	}
-    
-    @Test
-   	void ResponseTestsMissValues() throws URISyntaxException  {
-   		
-   		RestTemplate restTemplate = new RestTemplate();
-   		//construyo la url
-           final String baseUrl = "http://localhost:"+port+"/calculator";
-           
-   		URI uri = new URI(baseUrl);
-   		
-   		//set de las variables que quiero probar
-           OperationModel<Object> model = new OperationModel<>();
-           model.setA("9.00");
-           
-           //set de los eders de la llamada
-           HttpHeaders headers = new HttpHeaders(); 
-           
-           HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
-           
-           try
-           {
-               restTemplate.postForEntity(uri, request, String.class);
-               Assertions.fail();
-           }
-           catch(HttpClientErrorException ex) 
-           {
-               //faltan los valores de input y nos tiene que devolver un 500
-               Assertions.assertEquals(500, ex.getRawStatusCode());
-               Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
-           }
-           
-   	}
+
+	@Test
+	void ResponseTestsMissValues() throws URISyntaxException {
+
+		RestTemplate restTemplate = new RestTemplate();
+		// construyo la url
+		final String baseUrl = "http://localhost:" + port + "/calculator";
+
+		URI uri = new URI(baseUrl);
+
+		// set de las variables que quiero probar
+		OperationModel<Object> model = new OperationModel<>();
+		model.setA("9.00");
+
+		// set de los eders de la llamada
+		HttpHeaders headers = new HttpHeaders();
+
+		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
+
+		try {
+			restTemplate.postForEntity(uri, request, String.class);
+			Assertions.fail();
+		} catch (HttpClientErrorException ex) {
+			// faltan los valores de input y nos tiene que devolver un 500
+			Assertions.assertEquals(500, ex.getRawStatusCode());
+			Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
+		}
+
+	}
 
 }
