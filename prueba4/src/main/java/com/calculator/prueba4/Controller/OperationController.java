@@ -1,6 +1,5 @@
 package com.calculator.prueba4.Controller;
 
-import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import io.corp.calculator.TracerImpl;
 public class OperationController extends TracerImpl{
 	
 	//inicializo el model
-	OperationModel<BigDecimal> modelBean = new OperationModel<>();
+	OperationModel<Object> modelBean = new OperationModel<Object>();
 	
 	@Autowired
 	private OperationServices operationServices;
@@ -42,7 +41,7 @@ public class OperationController extends TracerImpl{
 	 * @return
 	 */
 	@RequestMapping(value="/calculator", params="add", method = RequestMethod.POST)
-    private String add(@ModelAttribute("operationModel")  OperationModel modelBean, Model model ){
+    private String add(@ModelAttribute("operationModel")  OperationModel<Object> modelBean, Model model ){
         model.addAttribute("result", operationServices.add(modelBean));
         return "calculator";
     }
@@ -54,7 +53,7 @@ public class OperationController extends TracerImpl{
 	 * @return
 	 */
     @RequestMapping(value="/calculator", params="subtract", method = RequestMethod.POST)
-    private String subtract(@ModelAttribute("operationBean")  OperationModel modelBean, Model model ){
+    private String subtract(@ModelAttribute("operationModel")  OperationModel<Object> modelBean, Model model ){
         model.addAttribute("result", operationServices.subtr(modelBean));
         return "calculator";
     }

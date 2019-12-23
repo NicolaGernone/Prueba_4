@@ -12,8 +12,9 @@ import io.corp.calculator.TracerImpl;
 public class OperationServices extends TracerImpl {
 	
 	//declaro las variables de suma y resta
-	private BigDecimal sum;
-	private BigDecimal rest;
+	private BigDecimal sum = new BigDecimal(0);
+	private BigDecimal rest  = new BigDecimal(0);
+	
 	
 	/**
 	 * servicio que devuelve la suma de dos valores
@@ -21,11 +22,12 @@ public class OperationServices extends TracerImpl {
 	 * @return 
 	 * @return
 	 */
-	public <T> BigDecimal add(OperationModel<BigDecimal> model){
+	public BigDecimal add(OperationModel<Object> model){
         try {
         	trace("La primera variable introducida es: " + model.getA());
         	trace("La segunda variable introducida es: " + model.getB());
-        	sum = model.getA().add(model.getB());
+        	sum = new BigDecimal(model.getA().toString());
+        	sum = sum.add(new BigDecimal(model.getB().toString()));
         	trace("La suma de los valores es: " + sum);
 			return sum;
 		} catch (Exception e) {
@@ -38,14 +40,15 @@ public class OperationServices extends TracerImpl {
 	
 	/**
 	 * servicio que devuelve la resta de dos valores
-	 * @param model
+	 * @param modelBean
 	 * @return
 	 */
-	public <T> BigDecimal subtr(OperationModel<BigDecimal> model){
+	public BigDecimal subtr(OperationModel<Object> modelBean){
         try {
-        	trace("La primera variable introducida es: " + model.getA());
-        	trace("La segunda variable introducida es: " + model.getB());
-        	rest = model.getA().subtract(model.getB());
+        	trace("La primera variable introducida es: " + modelBean.getA());
+        	trace("La segunda variable introducida es: " + modelBean.getB());
+        	rest = new BigDecimal(modelBean.getA().toString());
+        	rest = rest.subtract(new BigDecimal(modelBean.getB().toString()));
         	trace("La resta de los valores es: " + rest);
 			return rest;
 		} catch (Exception e) {
