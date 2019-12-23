@@ -15,13 +15,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.calculator.prueba4.Model.OperationModel;
 
-import io.corp.calculator.TracerImpl;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ServicesResponseTests extends TracerImpl {
+class ServicesResponseTests {
 
 	@LocalServerPort
 	private int port;
+	OperationModel<Object> model = new OperationModel<Object>();
 
 	@Test
 	void ResponseTestsOk() throws URISyntaxException {
@@ -33,7 +33,7 @@ class ServicesResponseTests extends TracerImpl {
 		URI uri = new URI(baseUrl);
 
 		// set de las variables que quiero probar
-		OperationModel<Object> model = new OperationModel<>();
+		
 		model.setA("9.00");
 		model.setB("67.98");
 
@@ -60,12 +60,12 @@ class ServicesResponseTests extends TracerImpl {
 		URI uri = new URI(baseUrl);
 
 		// set de las variables que quiero probar
-		OperationModel<Object> model = new OperationModel<>();
 		model.setA("9.00");
 		model.setB("67.98");
 
 		// set de los eders de la llamada
 		HttpHeaders headers = new HttpHeaders();
+		headers.set("X-COM-PERSIST", "true");
 
 		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
 
@@ -90,11 +90,12 @@ class ServicesResponseTests extends TracerImpl {
 		URI uri = new URI(baseUrl);
 
 		// set de las variables que quiero probar
-		OperationModel<Object> model = new OperationModel<>();
+		model.setA("9.00");
 		model.setA("9.00");
 
 		// set de los eders de la llamada
 		HttpHeaders headers = new HttpHeaders();
+		headers.set("X-COM-PERSIST", "true");
 
 		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
 
