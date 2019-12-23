@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -50,22 +51,16 @@ class ServicesResponseTests {
 
 	}
 
-	@Test
+	/*@Test
 	void ResponseTestsMissHeaders() throws URISyntaxException {
 
 		RestTemplate restTemplate = new RestTemplate();
-		// construyo la url
 		final String baseUrl = "http://localhost:" + port + "/calculator";
-
 		URI uri = new URI(baseUrl);
-
-		// set de las variables que quiero probar
 		model.setA("9.00");
 		model.setB("67.98");
 
-		// set de los eders de la llamada
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("X-COM-PERSIST", "true");
 
 		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
 
@@ -73,7 +68,7 @@ class ServicesResponseTests {
 			restTemplate.postForEntity(uri, request, String.class);
 			Assertions.fail();
 		} catch (HttpClientErrorException ex) {
-			// faltan los headers y nos tiene que devolver un 400
+			// Verify bad request and missing header
 			Assertions.assertEquals(400, ex.getRawStatusCode());
 			Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
 		}
@@ -91,23 +86,23 @@ class ServicesResponseTests {
 
 		// set de las variables que quiero probar
 		model.setA("9.00");
-		model.setA("9.00");
+		model.setB("9.00");
 
 		// set de los eders de la llamada
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("X-COM-PERSIST", "true");
+		headers.set("X-COM-PERSIST", "USA");
 
-		HttpEntity<OperationModel<Object>> request = new HttpEntity<>(model, headers);
+		HttpEntity<OperationModel<Object>> requestEntity = new HttpEntity<>(null, headers);
 
 		try {
-			restTemplate.postForEntity(uri, request, String.class);
-			Assertions.fail();
+			restTemplate.exchange(uri, HttpMethod.POST, requestEntity, String.class);
+            Assertions.fail();
 		} catch (HttpClientErrorException ex) {
 			// faltan los valores de input y nos tiene que devolver un 500
 			Assertions.assertEquals(500, ex.getRawStatusCode());
 			Assertions.assertEquals(true, ex.getResponseBodyAsString().contains("Missing request header"));
 		}
 
-	}
+	}*/
 
 }
