@@ -11,7 +11,7 @@ public class OperationModel<Object> {
     }
     
     public OperationModel(Object operation) {
-        this.operation = operation;
+        this.setOperation(operation);
     }
     public OperationModel(Object a, Object b) {
         this.a = a;
@@ -31,6 +31,14 @@ public class OperationModel<Object> {
 
 	public void setB(Object b) {
 		this.b = b;
+	}
+
+	public Object getOperation() {
+		return operation;
+	}
+
+	public void setOperation(Object operation) {
+		this.operation = operation;
 	}
 
 	
