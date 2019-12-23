@@ -1,45 +1,35 @@
 package com.calculator.prueba4.Model;
 
-public class OperationModel<T> {
+public class OperationModel<Object> {
 	
-	private String operation;
-    private T a;
-    private T b;
+    private Object a;
+    private Object b;
+    private Object operation;
     
     public OperationModel() {
     	
     }
     
-    public OperationModel(String operation) {
+    public OperationModel(Object operation) {
         this.operation = operation;
     }
-    
-    public OperationModel(T a, T b) {
+    public OperationModel(Object a, Object b) {
         this.a = a;
         this.b = b;
     }
-
-	public String getOperation() {
-		return operation;
-	}
-
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
-
-	public T getA() {
+	public Object getA() {
 		return a;
 	}
 
-	public void setA(T a) {
+	public void setA(Object a) {
 		this.a = a;
 	}
 
-	public T getB() {
+	public Object getB() {
 		return b;
 	}
 
-	public void setB(T b) {
+	public void setB(Object b) {
 		this.b = b;
 	}
 
