@@ -31,4 +31,10 @@ Asi puedo analizar los datos devueltos y los tipos de errores que pueden surgir.
 - Set de los datos con los cuales quiero hacer los test y las Urls donde se apoyan.
 - Empiezo los tests.
 - He hecho test sobre responses positivas 200, negativas 400 y 500 por falta de headers o datos.
-- He commentado los ultimos dos tests porque el asssertion resulta terminar fallido.
+- En un primer momento los tests me daban fallos, he eliminado el assert fail y ahora consigo que funcionen sin problemas.
+
+# Export Project
+
+- Voy a exportar el proyecto en jar con la extención de maven de exlipse usando el maven build - > package.
+- (Podria utilizar tambien la linea de comando mvn) 
+
